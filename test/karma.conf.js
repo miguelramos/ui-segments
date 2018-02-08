@@ -27,7 +27,6 @@ module.exports = (config) => {
       {pattern: 'node_modules/zone.js/dist/fake-async-test.js', included: true, watched: false},
       {pattern: 'node_modules/hammerjs/hammer.min.js', included: true, watched: false},
       {pattern: 'node_modules/hammerjs/hammer.min.js.map', included: false, watched: false},
-      {pattern: 'node_modules/moment/min/moment-with-locales.min.js', included: true, watched: false},
 
       // Include all Angular dependencies
       {pattern: 'node_modules/@angular/**/*', included: false, watched: false},
