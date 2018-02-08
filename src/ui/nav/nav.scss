@@ -1,0 +1,7 @@
+@import 'ui/core/theming/all-theme';
+
+:host {
+  @include until($desktop) {
+    display: block;
+  }
+}

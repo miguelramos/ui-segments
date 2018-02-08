@@ -1,0 +1,33 @@
+// TypeScript config that extends the demo-app tsconfig file. This config compiles the
+// "main-aot.ts" file and also enables templage code generation / AOT.
+{
+  "extends": "./tsconfig-build",
+  "compilerOptions": {
+    // Needed for Moment.js since it doesn't have a default export.
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "outDir": "../../dist/packages/demo-app",
+    "rootDirs": [
+      ".",
+      "../../dist/packages/demo-app"
+    ],
+    "paths": {
+      "@segment/ui/*": ["../../dist/releases/ui/*"],
+      "@segment/ui": ["../../dist/releases/ui"],
+      "@segment/carbon/*": ["../../dist/releases/carbon/*"],
+      "@segment/carbon": ["../../dist/releases/carbon"]
+    }
+  },
+  "files": [
+    "./demo-app-types.d.ts",
+    "./demo-app-module.ts",
+    "./main-aot.ts"
+  ],
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": false,
+    // TODO: disabled for now due to @angular/forms
+    "fullTemplateTypeCheck": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@segment/ui",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "UI Segment components",
+  "main": "./bundles/ui.umd.js",
+  "module": "./esm5/ui.es5.js",
+  "es2015": "./esm2015/ui.js",
+  "typings": "./ui.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguelramos/ui-segments.git"
+  },
+  "keywords": [
+    "ui",
+    "bulma",
+    "segments",
+    "components"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miguelramos/ui-segments/issues"
+  },
+  "homepage": "https://github.com/miguelramos/ui-segments#readme",
+  "peerDependencies": {
+    "@segment/carbon": "0.0.0-PLACEHOLDER",
+    "@angular/core": "0.0.0-NG",
+    "@angular/common": "0.0.0-NG"
+  },
+  "dependencies": {
+    "tslib": "^1.7.1"
+  }
+}
