@@ -5,7 +5,8 @@ export const carbonPackage = new BuildPackage('carbon');
 export const segmentPackage = new BuildPackage('ui', [carbonPackage]);
 
 /*export const cdkExperimentalPackage = new BuildPackage('cdk-experimental', [materialPackage]);
-export const materialExperimentalPackage = new BuildPackage('material-experimental', [cdkExperimentalPackage]);
+export const materialExperimentalPackage = new BuildPackage('material-experimental',
+  [cdkExperimentalPackage]);
 export const momentAdapterPackage = new BuildPackage('material-moment-adapter', [materialPackage]);
 export const examplesPackage = new BuildPackage('material-examples', [momentAdapterPackage]);*/
 

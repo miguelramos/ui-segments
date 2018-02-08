@@ -1,9 +1,9 @@
 /**
  * @license
- * Copyright Google LLC All Rights Reserved.
+ * Copyright UI-Segments All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * found in the LICENSE file at https://ui-segments.io/license
  */
 
 import {ApplicationRef, NgModule} from '@angular/core';
@@ -21,7 +21,6 @@ import { AppModule } from './app/app-module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppModule,
-    //AccessibilityDemoModule,
     RouterModule.forRoot(ALL_ROUTES),
   ],
   declarations: [
