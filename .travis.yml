@@ -56,7 +56,7 @@ before_script:
   - npm install -g gulp-cli
 
 script:
-  - gulp test
+  - gulp ci:test
 
 cache:
   directories:
