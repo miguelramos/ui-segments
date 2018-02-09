@@ -19,8 +19,8 @@ branches:
   only:
   - master
 
-#jobs:
-#  include:
+jobs:
+  include:
 #    - env: "MODE=lint"
 #    - env: "MODE=aot"
 #    - env: "MODE=payload"
@@ -31,7 +31,7 @@ branches:
 #    - env: "MODE=e2e"
 #    - env: "MODE=saucelabs_required"
 #    - env: "MODE=browserstack_required"
-#    - env: "MODE=travis_required"
+    - env: "MODE=travis_required"
 #    - env: "DEPLOY_MODE=build-artifacts"
 #    - env: "DEPLOY_MODE=docs-content"
 #    - env: "DEPLOY_MODE=screenshot-tool"
