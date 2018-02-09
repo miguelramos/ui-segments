@@ -1,3 +1,3 @@
-# Navbar Component
+# Button Component
 
 In Development.
