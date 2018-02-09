@@ -8,4 +8,4 @@ Angular 2 components based on Bulma css framework. For tooling it was used the c
 
 | Component | Doc                                                    | State | Coverage |
 |-----------|--------------------------------------------------------|-------|----------|
-| Navbar    | [README](ui-segments/blob/master/src/ui/nav/README.md) | Test  | 72.51%   |
+| Navbar    | [README](src/ui/nav/README.md)                         | Test  | 72.51%   |
