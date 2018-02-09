@@ -9,7 +9,7 @@ createPackageBuildTasks(segmentPackage);
 
 import './tasks/aot';
 import './tasks/changelog';
-// import './tasks/ci';
+import './tasks/ci';
 import './tasks/clean';
 import './tasks/coverage';
 import './tasks/default';
