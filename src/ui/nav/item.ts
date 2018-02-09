@@ -36,15 +36,15 @@ export class UINavItem implements OnDestroy {
   @Input()
   isActive = false;
 
+  ngOnDestroy(): void {
+    this.onClick.unsubscribe();
+  }
+
   _onClick(ev: MouseEvent) {
     ev.preventDefault();
 
     this._setDropdownVisibility();
     this.onClick.next({ target: ev.currentTarget, source: this });
-  }
-
-  ngOnDestroy(): void {
-    this.onClick.unsubscribe();
   }
 
   private _setDropdownVisibility() {
@@ -71,7 +71,21 @@ export class UINavDropDown {
 @Directive({
   selector: 'ui-navbar-link, a[ui-navbar-link]',
   host: {
-    'class': 'navbar-link'
+    'class': 'navbar-link',
+    '(click)': '_onClick($event)'
   }
 })
-export class UINavLink { }
+export class UINavLink implements OnDestroy {
+  @Output()
+  readonly onClick = new Subject<MouseEvent>();
+
+  ngOnDestroy() {
+    this.onClick.unsubscribe();
+  }
+
+  _onClick(ev: MouseEvent) {
+    ev.preventDefault();
+
+    this.onClick.next(ev);
+  }
+}

@@ -48,13 +48,14 @@ module.exports = (config) => {
       'dist/packages/**/*.js': ['sourcemap']
     },
 
-    reporters: ['dots'],
+    reporters: ['dots', 'progress'],
     autoWatch: false,
 
     coverageReporter: {
       type : 'json-summary',
       dir : 'dist/coverage/',
-      subdir: '.'
+      subdir: '.',
+      reporters: []
     },
 
     sauceLabs: {
@@ -123,5 +124,13 @@ module.exports = (config) => {
     }
 
     config.browsers = platformMap[platform][target.toLowerCase()];
+  } else {
+    config.preprocessors['dist/packages/**/!(*+(.|-)spec).js'] = ['coverage'];
+    config.reporters.push('coverage');
+    config.coverageReporter.reporters.push(
+      { type: 'html', subdir: 'report-html' },
+      { type: 'lcov', subdir: 'report-lcov' },
+      { type: 'json-summary', subdir: 'report-json' },
+    );
   }
 };

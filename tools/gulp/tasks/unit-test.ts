@@ -47,7 +47,7 @@ task('test', [':test:build'], karmaWatchTask());
  * This is identical to `gulp test`, however it won't launch and manage Chrome automatically,
  * which makes it convenient debugging unit tests against multiple different browsers.
  */
-task('test:static', [':test:build'], karmaWatchTask({browsers: []}));
+task('test:static', [':test:build'], karmaWatchTask({browsers: ['Chrome']}));
 
 /**
  * Returns a Gulp task that spawns a Karma server and reloads whenever the files change.
