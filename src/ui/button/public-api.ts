@@ -6,5 +6,5 @@
  * found in the LICENSE file at https://ui-segments.io/license
  */
 
-export * from './buttton-module';
+export * from './button-module';
 
