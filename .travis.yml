@@ -36,9 +36,9 @@ branches:
 #    - env: "DEPLOY_MODE=docs-content"
 #    - env: "DEPLOY_MODE=screenshot-tool"
 #    - env: "DEPLOY_MODE=dashboard"
-#env:
-#  global:
-#  - LOGS_DIR=/tmp/angular-material2-build/logs
+env:
+  global:
+  - LOGS_DIR=/tmp/ui-segments-build/logs
 #  - SAUCE_USERNAME=angular-ci
 #  - BROWSER_STACK_USERNAME=angularteam1
 #  - BROWSER_STACK_ACCESS_KEY=BWCd4SynLzdDcv8xtzsB
