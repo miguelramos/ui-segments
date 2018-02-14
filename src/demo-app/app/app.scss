@@ -1,0 +1,25 @@
+@import 'ui/core/theming/all-theme';
+@import 'bulma/sass/utilities/derived-variables';
+@import 'bulma/sass/utilities/mixins';
+@import 'bulma/sass/components/navbar';
+
+:host::ng-deep {
+  #main-wrapper {
+    width: 100%;
+
+    .left-sidebar {
+      height: 100%;
+      top: 0px;
+      z-index: 20;
+      position: fixed;
+      background: #272c33;
+      padding: $navbar-height 0 0 0 !important;
+      box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-wrapper {
+      background: #f2f4f8;
+      padding: 1.25rem 0 $navbar-height 0 !important;
+    }
+  }
+}

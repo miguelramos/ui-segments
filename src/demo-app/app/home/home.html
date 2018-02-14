@@ -1,0 +1,53 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        UI Segments
+      </h1>
+      <h2 class="subtitle">
+        Components styled by Bulma for Angular.
+      </h2>
+    </div>
+  </div>
+</section>
+<div class="content">
+  <h1>Navbar</h1>
+  <div class="bd-example">
+    <nav ui-nav class="is-warning" [isTransparent]="true">
+      <ui-navbar-brand>
+        <a ui-navbar-item>Navbar</a>
+        <ui-navbar-burger data-target="target-nav-menu"></ui-navbar-burger>
+      </ui-navbar-brand>
+      <ui-navbar-menu id="target-nav-menu">
+        <div class="navbar-start">
+          <div ui-navbar-item [hasDropdown]="true">
+            <a ui-navbar-link>
+              Dropdown
+            </a>
+            <div ui-navbar-dropdown [isRight]="false">
+              <a ui-navbar-item>
+                Item on dropdown
+              </a>
+            </div>
+          </div>
+        </div>
+      </ui-navbar-menu>
+    </nav>
+  </div>
+
+  <h1>Buttons</h1>
+  <div class="bd-example">
+    <a ui-button>Simple Button</a>
+    <a class="is-success" ui-button [isRounded]="true">Rounded Button</a>
+    <a class="is-danger" ui-button [isDisabled]="true">Disabled Button</a>
+    <a class="is-warning" ui-button [isLoading]="true">Loading</a>
+    <a class="is-info" ui-button [isActive]="true">Active Button</a>
+    <a class="is-primary" ui-button [isStatic]="true">Static Button</a>
+    <a ui-button>
+      <span class="icon">
+        <i class="fab fa-github"></i>
+      </span>
+      <span>GitHub</span>
+    </a>
+  </div>
+</div>
