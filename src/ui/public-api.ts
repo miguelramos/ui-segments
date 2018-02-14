@@ -10,6 +10,7 @@ export * from './version';
 
 export * from '@segment/ui/nav';
 export * from '@segment/ui/button';
+export * from '@segment/ui/image';
 export * from '@segment/ui/core';
 
 /*export * from '@angular/material/autocomplete';

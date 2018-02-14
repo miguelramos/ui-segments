@@ -6,7 +6,8 @@ Angular 2 components based on Bulma css framework. For tooling it was used the c
 
 # Components
 
-| Component | Doc                                                    | State | Coverage |
-|-----------|--------------------------------------------------------|-------|----------|
-| Navbar    | [README](src/ui/nav/README.md)                         | Test  | 72.51%   |
-| Button    | [README](src/ui/button/README.md)                      | Init  | 0%       |
+| Component | Doc                                                    | State        | Coverage |
+|-----------|--------------------------------------------------------|--------------|----------|
+| Navbar    | [README](src/ui/nav/README.md)                         | Test         | 72.51%   |
+| Button    | [README](src/ui/button/README.md)                      | Development  | 0%       |
+| Image     | [README](src/ui/image/README.md)                       | Development  | 0%       |

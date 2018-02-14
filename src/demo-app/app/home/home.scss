@@ -9,4 +9,10 @@
   .button {
     margin: 0.5rem;
   }
+
+  .field, .buttons {
+    .button {
+      margin: 0;
+    }
+  }
 }
