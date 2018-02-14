@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://www.ui-segments.io/license
  */
 
-import { Component, Input, Output, Renderer2, ElementRef } from '@angular/core';
+import { Component, Input, Output, Renderer2, ElementRef, Directive } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -66,5 +66,24 @@ export class UIButton {
     ev.preventDefault();
 
     this.onClick.next({ target: ev.currentTarget });
+  }
+}
+
+@Directive({
+  selector: 'ui-delete, [ui-delete]',
+  host: {
+    'class': 'delete',
+    '(click)': '_onClick($event)'
+  }
+})
+export class UIDelete {
+
+  @Output()
+  readonly onClick = new Subject<EventTarget>();
+
+  _onClick(ev: MouseEvent) {
+    ev.preventDefault();
+
+    this.onClick.next(ev.currentTarget);
   }
 }

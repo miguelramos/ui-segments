@@ -58,10 +58,12 @@ export class UIImage implements AfterContentInit {
   images: HTMLImageElement[]  = [];
 
   ngAfterContentInit() {
-    this.imageQuery.map(image => image.onReady.first()
-      .subscribe(q => {
-        this.images.push(q.target);
-        this.onImage.next(q.target);
-      }));
+    if (this.imageQuery.length > 0) {
+      this.imageQuery.map(image => image.onReady.first()
+        .subscribe(q => {
+          this.images.push(q.target);
+          this.onImage.next(q.target);
+        }));
+    }
   }
 }
