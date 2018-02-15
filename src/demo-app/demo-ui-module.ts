@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { UINavModule } from '@segment/ui/nav';
 import { UIButtonModule } from '@segment/ui/button';
 import { UIImageModule } from '@segment/ui/image';
+import { UINotificationModule } from '@segment/ui/notification';
 import { UIResponsiveModule } from '@segment/ui/core';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { UIResponsiveModule } from '@segment/ui/core';
     UIResponsiveModule,
     UINavModule,
     UIButtonModule,
-    UIImageModule
+    UIImageModule,
+    UINotificationModule
   ]
 })
 export class DemoUIModule {}

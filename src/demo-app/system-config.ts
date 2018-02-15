@@ -39,10 +39,13 @@ System.config({
     '@segment/ui': 'dist/packages/ui/public-api.js',
     '@segment/carbon': 'dist/packages/carbon/index.js',
 
+    '@segment/carbon/portal': 'dist/packages/carbon/portal/index.js',
+
     '@segment/ui/core': 'dist/packages/ui/core/index.js',
     '@segment/ui/nav': 'dist/packages/ui/nav/index.js',
     '@segment/ui/button': 'dist/packages/ui/button/index.js',
     '@segment/ui/image': 'dist/packages/ui/image/index.js',
+    '@segment/ui/notification': 'dist/packages/ui/notification/index.js',
   },
   packages: {
     // Thirdparty barrels.

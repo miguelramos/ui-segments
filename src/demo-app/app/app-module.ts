@@ -7,7 +7,7 @@ import { DEMO_APP_ROUTES } from './routes';
 import { DemoUIModule } from '../demo-ui-module';
 
 import { DemoApp } from './app-component';
-import { Home } from './home/home-component';
+import { Home, Notify } from './home/home-component';
 
 @NgModule({
   imports: [
@@ -19,10 +19,11 @@ import { Home } from './home/home-component';
   ],
   declarations: [
     Home,
+    Notify,
     DemoApp
   ],
   entryComponents: [
-    DemoApp
+    DemoApp, Notify
   ]
 })
 export class AppModule {}

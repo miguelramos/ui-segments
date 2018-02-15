@@ -6,7 +6,15 @@
  * found in the LICENSE file at https://www.ui-segments.io/license
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UINotification } from '@segment/ui/notification';
+
+@Component({
+  moduleId: module.id,
+  selector: 'ng-notify',
+  template: `<h1>My Custom Notification</h1>`
+})
+export class Notify {}
 
 @Component({
   moduleId: module.id,
@@ -15,4 +23,13 @@ import { Component } from '@angular/core';
   styleUrls: ['home.css'],
   preserveWhitespaces: false,
 })
-export class Home {}
+export class Home implements OnInit {
+
+  constructor(
+    private _notification: UINotification
+  ) { }
+
+  ngOnInit() {
+    // this._notification.openFromComponent(Notify, {});
+  }
+}
