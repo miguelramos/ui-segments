@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://www.ui-segments.io/license
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { UINotification } from '@segment/ui/notification';
 
 @Component({
@@ -23,13 +23,13 @@ export class Notify {}
   styleUrls: ['home.css'],
   preserveWhitespaces: false,
 })
-export class Home implements OnInit {
+export class Home {
 
   constructor(
     private _notification: UINotification
   ) { }
 
-  ngOnInit() {
-    // this._notification.openFromComponent(Notify, {});
+  open() {
+    this._notification.openWithComponent(Notify);
   }
 }

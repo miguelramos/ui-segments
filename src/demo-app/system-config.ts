@@ -40,6 +40,7 @@ System.config({
     '@segment/carbon': 'dist/packages/carbon/index.js',
 
     '@segment/carbon/portal': 'dist/packages/carbon/portal/index.js',
+    '@segment/carbon/overlay': 'dist/packages/carbon/overlay/index.js',
 
     '@segment/ui/core': 'dist/packages/ui/core/index.js',
     '@segment/ui/nav': 'dist/packages/ui/nav/index.js',
