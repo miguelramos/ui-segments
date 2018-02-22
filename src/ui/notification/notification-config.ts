@@ -12,8 +12,8 @@ export type NotificationHorizontalPosition = 'left' | 'center' | 'right';
 export class UINotificationConfig {
   duration?: number = 0;
 
-  horizontalPosition?: NotificationHorizontalPosition = 'right';
-  verticalPosition?: NotificationVerticalPosition = 'top';
+  horizontalPosition?: NotificationHorizontalPosition = 'center';
+  verticalPosition?: NotificationVerticalPosition = 'bottom';
 
   width?: number = 300;
   height?: number = 80;

@@ -80,6 +80,11 @@ export class UINotificationContainer extends BasePortalOutlet {
 @Injectable()
 export class UINotification {
 
+  readonly animationStartDone = new Subject();
+  readonly animationEndDone = new Subject();
+
+  private _openedRef: ComponentRef<UINotificationContainer>;
+
   constructor(
     private _overlay: UIOverlay,
     private _injector: Injector,
@@ -89,12 +94,17 @@ export class UINotification {
   openWithComponent<T>(component: ComponentType<T>, config?: UINotificationConfig) {
     // Promise.resolve().then(() => {});
     const _config = _applyConfigDefaults(config);
+
+    this.animationEndDone.first().subscribe(() => this._openedRef.destroy());
+
     this._attach(component, _config);
   }
 
   private _attachContainer(overlayRef: UIOverlayRef) {
     const container = new ComponentPortal(UINotificationContainer, undefined, this._injector);
     const containerRef: ComponentRef<UINotificationContainer> = overlayRef.attach(container);
+
+    this._openedRef = containerRef;
 
     return containerRef.instance;
   }
@@ -137,13 +147,13 @@ export class UINotification {
     ]);
 
     const bottomInOut = animation([
-      style({ bottom: '{{from}}', width: `${config.width}`, position: 'absolute' }),
-      animate(200, style({ bottom: '{{to}}' }))
+      style({ bottom: '{{from}}', width: `${config.width}px`, position: 'absolute' }),
+      animate(200, style({ bottom: '{{to}}', position: 'relative' }))
     ]);
 
     const topInOut = animation([
-      style({ top: '{{from}}', width: `${config.width}`, position: 'absolute' }),
-      animate(200, style({ top: '{{to}}' }))
+      style({ top: '{{from}}', width: `${config.width}px`, position: 'absolute' }),
+      animate(200, style({ top: '{{to}}', position: 'relative' }))
     ]);
 
     if (config.horizontalPosition === 'left') {
@@ -154,10 +164,16 @@ export class UINotification {
       effect = rightInOut;
     }
 
+    if (config.horizontalPosition === 'center') {
+      effect = config.verticalPosition === 'top' ? topInOut : bottomInOut;
+    }
+
+    const size = config.horizontalPosition === 'center' ? config.height : config.width;
+
     const animeStart = (this._builder as AnimationBuilder).build([
       useAnimation(effect, {
         params: {
-          from: `-${config.width as number + 100}px`,
+          from: `-${size as number + 100}px`,
           to: '0px'
         }
       })
@@ -166,7 +182,7 @@ export class UINotification {
     const animeEnd = (this._builder as AnimationBuilder).build([
       useAnimation(effect, {
         params: {
-          to: `-${config.width as number + 100}px`,
+          to: `-${size as number + 100}px`,
           from: '0px'
         }
       })
@@ -175,10 +191,20 @@ export class UINotification {
     const playerStart = animeStart.create(overlay.overlayElement, { delay: 0 });
     const playerEnd = animeEnd.create(overlay.overlayElement, { delay: 0 });
 
-    /* playerStart.onDone(() => {
-      const timeout = setTimeout(() => playerEnd.play(), config.duration);
-      playerEnd.onDone(() => clearTimeout(timeout));
-    }); */
+    playerStart.onDone(() => {
+      this.animationStartDone.next(this);
+
+      if (config.duration as number > 0) {
+        const timeout = setTimeout(() => playerEnd.play(), config.duration);
+        playerEnd.onDone(() => {
+          overlay.dispose();
+
+          this.animationEndDone.next(this);
+
+          clearTimeout(timeout);
+        });
+      }
+    });
 
     playerStart.play();
   }

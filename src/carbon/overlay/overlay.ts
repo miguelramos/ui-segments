@@ -73,6 +73,12 @@ export class UIOverlay {
     if (config.horizontalPosition === 'right') {
       container.style.right = '1%';
     }
+
+    if (config.horizontalPosition === 'center') {
+      container.style.right = '0';
+      container.style.left = '0';
+      container.style.margin = '0 auto';
+    }
   }
 
   private _createPortalOutlet(pane: HTMLElement): DomPortalOutlet {
