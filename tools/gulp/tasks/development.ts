@@ -39,15 +39,15 @@ const vendorGlob = `+(${appVendors.join('|')})/**/*.+(html|css|js|map)`;
 const assetsGlob = join(appDir, `**/*.+(html|css|svg|ico)`);
 
 task(':watch:devapp', () => {
-  watchFiles(join(appDir, '**/*.ts'), [':build:devapp:ts']);
-  watchFiles(join(appDir, '**/*.scss'), [':build:devapp:scss']);
-  watchFiles(join(appDir, '**/*.html'), [':build:devapp:assets']);
+  watchFiles(join(appDir, '**/*.ts'), [':build:devapp:ts'], true);
+  watchFiles(join(appDir, '**/*.scss'), [':build:devapp:scss'], true);
+  watchFiles(join(appDir, '**/*.html'), [':build:devapp:assets'], true);
 
   // Custom watchers for all packages that are used inside of the demo-app. This is necessary
   // because we only want to build the changed package (using the build-no-bundles task).
-  watchFiles(join(carbonPackage.sourceDir, '**/*'), ['carbon:build-no-bundles']);
-  watchFiles(join(segmentPackage.sourceDir, '**/!(*.scss)'), ['ui:build-no-bundles']);
-  watchFiles(join(segmentPackage.sourceDir, '**/*.scss'), [':build:devapp:ui-with-styles']);
+  watchFiles(join(carbonPackage.sourceDir, '**/*'), ['carbon:build-no-bundles'], true);
+  watchFiles(join(segmentPackage.sourceDir, '**/!(*.scss)'), ['ui:build-no-bundles'], true);
+  watchFiles(join(segmentPackage.sourceDir, '**/*.scss'), [':build:devapp:ui-with-styles'], true);
 });
 
 /** Path to the demo-app tsconfig file. */

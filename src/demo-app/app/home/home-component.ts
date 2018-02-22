@@ -30,6 +30,10 @@ export class Home {
   ) { }
 
   open() {
-    this._notification.openWithComponent(Notify);
+    this._notification.openWithComponent(Notify, {
+      duration: 4000,
+      width: 400,
+      height: 90
+    });
   }
 }

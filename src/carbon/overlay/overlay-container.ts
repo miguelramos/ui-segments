@@ -47,13 +47,7 @@ export class UIOverlayContainer implements OnDestroy {
   }
 
   private _styleContainer(container: HTMLElement): void {
-    container.style.position = 'absolute';
-    // container.style.top = '0';
-    // container.style.bottom = '0';
-    // container.style.right = '0';
-    // container.style.left = '0';
-    // container.style.width = '100%';
-    // container.style.height = '100%';
+    container.style.position = 'fixed';
     container.style.zIndex = '999';
   }
 }

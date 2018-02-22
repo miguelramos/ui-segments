@@ -5,6 +5,9 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://www.ui-segments/license
  */
+import { Optional } from '@angular/core';
+
+
 import { UIOverlayConfig } from './overlay-config';
 import { PortalOutlet, Portal } from '@segment/carbon/portal';
 
@@ -23,6 +26,9 @@ export class UIOverlayRef implements PortalOutlet {
   attach(portal: Portal<any>) {
     const attach = this._portalOutlet.attach(portal);
 
+    this._updateSize();
+    console.dir(this);
+
     return attach;
   }
 
@@ -37,4 +43,19 @@ export class UIOverlayRef implements PortalOutlet {
   dispose() {
     this._portalOutlet.dispose();
   }
+
+  private _updateSize() {
+    if (this._config.width || this._config.width === 0) {
+      (this._element.parentElement as HTMLElement).style.width = formatCssUnit(this._config.width);
+    }
+
+    if (this._config.height || this._config.height === 0) {
+      (this._element.parentElement as HTMLElement)
+        .style.height = formatCssUnit(this._config.height);
+    }
+  }
+}
+
+function formatCssUnit(value: number | string) {
+  return typeof value === 'string' ? value as string : `${value}px`;
 }

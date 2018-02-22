@@ -13,6 +13,8 @@ import {
   ComponentFactoryResolver
 } from '@angular/core';
 
+
+
 import { DOCUMENT } from '@angular/common';
 
 import { UIOverlayRef } from './overlay-ref';
@@ -34,6 +36,8 @@ export class UIOverlay {
     const panel = this._createDomElement();
     const outlet = this._createPortalOutlet(panel);
 
+    this._containerPosition(config);
+
     return new UIOverlayRef(
       outlet,
       panel,
@@ -42,10 +46,33 @@ export class UIOverlay {
   }
 
   private _createDomElement(): HTMLElement {
-    const el = this._document.createElement('div');
+    const key = Math.random().toString(36).substr(2, 10);
+    const el = this._document.createElement('div') as HTMLElement;
+    el.id = key;
+
     this._overlayContainer.getContainer().appendChild(el);
 
     return el;
+  }
+
+  private _containerPosition(config: UIOverlayConfig): void {
+    const container = this._overlayContainer.getContainer();
+
+    if (config.verticalPosition === 'bottom') {
+      container.style.bottom = '1%';
+    }
+
+    if (config.verticalPosition === 'top') {
+      container.style.top = '1%';
+    }
+
+    if (config.horizontalPosition === 'left') {
+      container.style.left = '1%';
+    }
+
+    if (config.horizontalPosition === 'right') {
+      container.style.right = '1%';
+    }
   }
 
   private _createPortalOutlet(pane: HTMLElement): DomPortalOutlet {

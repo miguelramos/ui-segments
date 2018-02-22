@@ -12,8 +12,8 @@ export type OverlayHorizontalPosition = 'left' | 'center' | 'right';
 export class UIOverlayConfig {
   duration?: number = 0;
 
-  width?: string;
-  height?: string;
+  width?: number|string;
+  height?: number|string;
   horizontalPosition?: OverlayHorizontalPosition = 'center';
   verticalPosition?: OverlayVerticalPosition = 'bottom';
 }
