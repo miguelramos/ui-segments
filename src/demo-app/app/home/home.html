@@ -101,9 +101,17 @@
 
   <h1>Images</h1>
   <div class="bd-example">
-    <figure ui-image class="is-128x128">
-      <img src="https://bulma.io/images/placeholders/128x128.png">
+    <figure ui-image class="is-128x128" (onImageReady)="imageReady($event)">
+      <img src="https://cdn.gratisography.com/photos/384H.jpg">
     </figure>
-    <a ui-button (click)="open()">Open</a>
+    <p>{{messageImageReady}}</p>
+    <figure ui-image class="is-128x128" src="https://source.unsplash.com/WLUHO9A_xik/1600x900" (onProgress)="imageProgress($event)"></figure>
+    <progress class="progress is-success" [value]="progressValue" max="100">{{progressValue}}%</progress>
+    <figure ui-image class="is-128x128" src="https://cdn.gratisography.com/photos/384H.jpg"></figure>
+  </div>
+
+  <h1>Notifications</h1>
+  <div class="bd-example">
+    <a ui-button (click)="open()">Open Notification</a>
   </div>
 </div>

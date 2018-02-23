@@ -18,4 +18,7 @@ export class UINotificationConfig {
   width?: number = 300;
   height?: number = 80;
   extraClasses?: string[] = ['is-danger'];
+  data?: any = null;
+  close?: boolean = true;
+  full?: boolean = false;
 }

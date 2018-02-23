@@ -21,8 +21,14 @@ import {
 } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
+
 import {
-  AnimationBuilder, style, animate, stagger, query, transition, animation, useAnimation
+  style,
+  animate,
+  animation,
+  useAnimation,
+  AnimationPlayer,
+  AnimationBuilder
 } from '@angular/animations';
 
 import { Subject } from 'rxjs/Subject';
@@ -35,47 +41,9 @@ import {
   DomPortalOutlet
 } from '@segment/carbon/portal';
 
+import { UINotificationContainer } from './notification-container';
 import { UINotificationConfig } from './notification-config';
 import { UIOverlay, UIOverlayRef } from '@segment/carbon/overlay';
-
-
-
-@Component({
-  moduleId: module.id,
-  selector: 'ui-notification-container',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<ng-template cdkPortalOutlet></ng-template>`,
-  host: {
-    'class': 'notification',
-    'style': 'display: block;'
-  }
-})
-export class UINotificationContainer extends BasePortalOutlet {
-  @ViewChild(CdkPortalOutlet) _portalOutlet: CdkPortalOutlet;
-
-  constructor(
-    private _elRef: ElementRef
-  ) {
-    super();
-  }
-
-  attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T> {
-    return this._portalOutlet.attachComponentPortal(portal);
-  }
-
-  attachTemplatePortal(): EmbeddedViewRef<any> {
-    throw Error('Not yet implemented');
-  }
-
-  addClasses(...classes: string[]): void {
-    (this._elRef.nativeElement as HTMLElement).classList.add(...classes);
-  }
-
-  setSize(width: number, heigth: number) {
-    (this._elRef.nativeElement as HTMLElement).style.width = `${width}px`;
-    (this._elRef.nativeElement as HTMLElement).style.height = `${heigth}px`;
-  }
-}
 
 @Injectable()
 export class UINotification {
@@ -91,13 +59,16 @@ export class UINotification {
     private _builder: AnimationBuilder
   ) { }
 
-  openWithComponent<T>(component: ComponentType<T>, config?: UINotificationConfig) {
+  openWithComponent<T>(
+    component: ComponentType<T>,
+    config?: UINotificationConfig
+  ): ComponentRef<T> {
     // Promise.resolve().then(() => {});
     const _config = _applyConfigDefaults(config);
 
     this.animationEndDone.first().subscribe(() => this._openedRef.destroy());
 
-    this._attach(component, _config);
+    return this._attach(component, _config);
   }
 
   private _attachContainer(overlayRef: UIOverlayRef) {
@@ -114,26 +85,37 @@ export class UINotification {
     const container = this._attachContainer(overlayRef);
     const portal = new ComponentPortal(component, undefined, this._injector);
 
+    const componentRef = container.attachComponentPortal(portal);
+    componentRef.instance['data'] = config.data;
+
+    const players = this.createAnimation(overlayRef, config);
+
     if (config.extraClasses) {
       container.addClasses(...config.extraClasses);
     }
 
-    container.attachComponentPortal(portal);
+    if (config.close) {
+      container.onDispose.first().subscribe(() => players[1].play());
+    }
 
-    this.animate(overlayRef, config);
+    return componentRef;
   }
 
   private _createOverlay(config: UINotificationConfig): UIOverlayRef {
+    console.dir(config);
+
     return this._overlay.create({
       duration: config.duration as number,
       width: config.width as number,
       height: config.height as number,
       horizontalPosition: config.horizontalPosition,
-      verticalPosition: config.verticalPosition
+      verticalPosition: config.verticalPosition,
+      // close: config.close,
+      // full: config.full
     });
   }
 
-  animate(overlay: UIOverlayRef, config: UINotificationConfig) {
+  createAnimation(overlay: UIOverlayRef, config: UINotificationConfig): AnimationPlayer[] {
     let effect;
 
     const leftInOut = animation([
@@ -195,18 +177,22 @@ export class UINotification {
       this.animationStartDone.next(this);
 
       if (config.duration as number > 0) {
-        const timeout = setTimeout(() => playerEnd.play(), config.duration);
-        playerEnd.onDone(() => {
-          overlay.dispose();
-
-          this.animationEndDone.next(this);
-
+        const timeout = setTimeout(() => {
+          playerEnd.play();
           clearTimeout(timeout);
-        });
+        }, config.duration);
       }
     });
 
+    playerEnd.onDone(() => {
+      overlay.dispose();
+
+      this.animationEndDone.next(this);
+    });
+
     playerStart.play();
+
+    return [playerStart, playerEnd];
   }
 }
 

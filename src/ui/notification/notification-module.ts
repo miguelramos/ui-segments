@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { UINotification } from './notification';
 import { PortalModule } from '@segment/carbon/portal';
 import { UIOverlayModule } from '@segment/carbon/overlay';
-import { UINotification, UINotificationContainer } from './notification';
+import { UINotificationContainer } from './notification-container';
 
 @NgModule({
   imports: [CommonModule, PortalModule, UIOverlayModule],

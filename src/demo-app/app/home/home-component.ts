@@ -25,15 +25,30 @@ export class Notify {}
 })
 export class Home {
 
+  progressValue = 0;
+  messageImageReady = 'Image is loading...';
+
   constructor(
     private _notification: UINotification
   ) { }
 
   open() {
     this._notification.openWithComponent(Notify, {
-      duration: 4000,
+      duration: 0,
       width: 400,
-      height: 90
+      height: 90,
+      data: {
+        key: 'hello'
+      }
     });
+  }
+
+  imageReady(image: HTMLImageElement) {
+    console.dir(image);
+    this.messageImageReady = 'Image loaded!!';
+  }
+
+  imageProgress(progress: number) {
+    this.progressValue = progress;
   }
 }
